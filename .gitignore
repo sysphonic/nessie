@@ -1,0 +1,14 @@
+/*.html
+!/about.html
+!/foot.html
+
+/css/
+/main/
+
+/img/**/
+!/img/common/
+!/img/thetisbox/
+!/img/icons/
+/img/icons/*
+!/img/icons/search.png
+

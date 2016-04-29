@@ -1,0 +1,25 @@
+body {margin:0px; padding:0px;}
+div {margin:0px; padding:0px;}
+table {border-spacing:0px;}
+td {padding:0px;}
+img {vertical-align:middle;}
+.img_btn {border-right:solid 1px darkgray; border-bottom:solid 1px darkgray; padding-right:2px; padding-bottom:2px; cursor:pointer;}
+.regular_table>thead>tr>td {color:dimgray; padding:0px 5px; background:url("../img/common/caption_bg.png") repeat-x center; border:solid 1px silver; border-radius:4px;}
+.record_summary_cap {color:mediumblue; font-style:italic;}
+.record_summary_highlight {background-color:pink;}
+.record_attr_highlight {color:sienna; border:solid 1px darkorange;}
+.div_empty {width:90%; border:dashed 4px burlywood; text-align:center; margin:10px; padding:30px 0px; color:peru; font-size:20px; font-weight:bold; border-radius:10px;}
+
+div.hr {border-bottom:solid 1px gray; margin:5px 0px;}
+#sort_sign {background-color:royalblue; color:white; display:inline-block; margin-left:3px; padding:0px 3px; font-weight:bold; line-height:1.0;}
+
+.regular_table {width:100%; border-spacing:1px;}
+.regular_table>tbody>tr {height:25px;}
+.regular_table>tbody>tr>td {text-align:left; padding:0px 5px;}
+.regular_table>tbody>tr:nth-child(odd):not(.record_selected)>td {background-color:white;}
+.regular_table>tbody>tr:nth-child(even):not(.record_selected)>td {background-color:gainsboro;}
+.regular_table>tbody>tr:not(.record_selected)>td:hover {background-color:lightcyan;}
+.regular_table>tbody#sortable_items>tr>td {cursor:move; border:2px solid transparent;}
+.regular_table>tbody#sortable_items>tr>td:hover {border-color:lime;}
+
+.record_selected>td {background-color:greenyellow;}

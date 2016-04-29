@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html style="height:100%;">
+<head>
+  <title>nessiefoot</title>
+  <meta charset="UTF-8">
+  <script src="foot/nessiefoot.js?ts=2016042601"></script>
+  <script src="foot/indexdb.js?ts=2016041201"></script>
+  <script src="common/prototype.js" type="text/javascript"></script>
+  <script src="common/scriptaculous/effects.js?ts=20150424" type="text/javascript"></script>
+  <script src="common/scriptaculous/dragdrop.js?ts=20150424" type="text/javascript"></script>
+  <script src="common/common.js?ts=2016041201"></script>
+  <script src="common/translation.js?ts=2015050701" type="text/javascript"></script>
+  <script src="common/thetisbox.js?ts=2016041201" type="text/javascript"></script>
+  <link href="foot/nessiefoot.css?ts=2016042701" rel="stylesheet" type="text/css" />
+  <link href="css/thetisbox.css?ts=2015061001" media="all" rel="stylesheet" type="text/css" />
+</head>
+<body onload="onLoadNessiefoot();" style="height:100%; margin:0px;">
+
+<table style="width:100%; background-color:#8DB7EB; border:solid 2px; border-top-color:lavender; border-left-color:lavender; border-bottom-color:dimgray; border-right-color:dimgray;"> 
+  <tr id="row_control_panel">
+    <td style="padding:2px 0px;">
+      <table style="width:100%;">
+        <tr>
+          <td style="background-color:dodgerblue; color:white; font-weight:bold; font-family:verdana; text-align:center; width:100px; padding:0px 10px; border-right:solid 1px gray; cursor:pointer; white-space:nowrap;" onclick="openWindow('about.html',600, 360, 'about'); return false;">
+            nessiefoot
+          </td>
+          <td style="text-align:left; width:200px; padding:0px 10px; white-space:nowrap; border-radius:5px; background-color:royalblue;">
+            <span style="color:white;">Database:</span>
+            <input type="text" id="input_db_name" value="" style="width:150px; border:none; border-radius:3px; padding:2px;" />
+            <img src="./img/icons/search.png" onclick="onDbNameEntered()" style="cursor:pointer; background-color:white; padding:1px 2px; border-radius:3px;" />
+          </td>
+          <td><!-- SPACER --></td>
+          <td style="text-align:right; width:250px; padding:0px 10px; white-space:nowrap;">
+            <span style="color:white;">Record:</span>
+            <input type="button" value="Create" onclick="onCreateRecordClicked();" style="width:80px;" />
+            <input type="button" value="Edit" onclick="onEditRecordClicked();" style="width:80px;" />
+          </td>
+          <td style="text-align:right; width:165px; padding:0px 10px; border-left:solid 1px gray; white-space:nowrap;">
+            <input type="button" value="Select All" onclick="onSelectAllRecordsClicked();" style="width:80px;" />
+            <input type="button" value="Delete" onclick="onDeleteRecordsClicked();" style="width:80px;" />
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr> 
+  <tr>
+    <td>
+
+      <table style="width:100%; background-color:white;">
+        <tr>
+          <td id="td_tree" style="width:25%; border:inset 1px silver; vertical-align:top;">
+            <div id="div_db_tree" style="overflow:auto;">
+              <div id="db_tree" style="padding:5px;">
+              </div>
+            </div>
+          </td>
+
+          <td id="drag_v_border" style="width:5px; vertical-align:middle; background-color:#8DB7EB; cursor:w-resize;">
+            <img src="/thetis/images/grip_vertical.png">
+          </td>
+
+          <td id="td_view" style="vertical-align:top;">
+            <table style="width:100%;">
+              <tr>
+                <td style="text-align:left; vertical-align:top; border:inset 1px silver;">
+                  <div id="div_records" style="width:100%; overflow:auto;">
+                    <table class="regular_table" id="tbl_records" style="width:100%; padding:5px 0px;">
+                    </table>
+                  </div>
+                </td>
+              </tr>
+              <tr style="height:5px">
+                <td id="drag_h_border" style="text-align:center; vertical-align:middle; background-color:#8DB7EB; cursor:s-resize; line-height:5px;">
+                  <img src="/thetis/images/grip_horizontal.png" style="vertical-align:top; height:5px;">
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align:left; border:inset 1px silver;">
+                  <div id="div_record_info" style="width:100%; overflow:auto;">
+                    <table class="regular_table" id="tbl_record_info" style="width:100%; padding:5px 0px;">
+                    </table>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<input type="hidden" id="sort_col" value="" />
+<input type="hidden" id="sort_type" value="" />
+
+</body>
+</html>
