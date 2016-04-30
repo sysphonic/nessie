@@ -252,8 +252,9 @@ function displayStoreRecord(record)
   var html = "";
   html += "<thead>";
   html += " <tr>";
-  html += "   <td style=\"width:18%;\" nowrap>Field</td>";
-  html += "   <td style=\"width:82%;\">Value</td>";
+  html += "   <td style=\"width:15%;\">Field</td>";
+  html += "   <td style=\"width:80%;\">Value</td>";
+  html += "   <td style=\"width:5%;\">Type</td>";
   html += " </tr>";
   html += "</thead>";
 
@@ -261,9 +262,21 @@ function displayStoreRecord(record)
   if (record) {
     for (var attr in record.attrs) {
       var val = record.attrs[attr];
+      var valType = typeof(val);
+      if (valType == "object" && val.constructor) {
+        valType = val.constructor;
+      }
+      var dispVal = null;
+      if (val == undefined) {
+        dispVal = "<span style=\"color:gray;\">--</span>";
+      } else {
+        dispVal = escapeHTML(String(val));
+      }
+
       html += " <tr>";
       html += "   <td>"+escapeHTML(String(attr))+"</td>";
-      html += "   <td>"+escapeHTML(String(val))+"</td>";
+      html += "   <td>"+dispVal+"</td>";
+      html += "   <td>"+escapeHTML(String(valType))+"</td>";
       html += " </tr>";
     }
   } else {
@@ -445,14 +458,14 @@ function getEditRecordHtml(oDatabase, oStore, oRecord)
   html += "  <tr>";
   html += "    <td style=\"width:80px;\"></td>";
   html += "    <td></td>";
-  html += "    <td nowrap style=\"width:40px; text-align:center;\">";
+  html += "    <td style=\"width:40px; text-align:center;\">";
   html += "      <span style=\"font-style:italic;\">Type</span>";
   html += "    </td>";
   html += "  </tr>";
   for (var i=0; oStore && (i < oStore.fieldNames.length); i++) {
     var fieldName = oStore.fieldNames[i];
     html += "  <tr>";
-    html += "    <td nowrap style=\"text-align:left; padding-left:5px;\">";
+    html += "    <td style=\"text-align:left; padding-left:5px;\">";
     html += fieldName;
     html += "    </td>";
     html += "    <td style=\"text-align:center;\">";
