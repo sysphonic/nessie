@@ -8,7 +8,7 @@ ul {line-height:1.8;}
 img {vertical-align:middle;}
 pre {font-size:1.0em; background:black; color:white; padding:15px;}
 hr {border:0px; width:90%; border-bottom:1px solid #aaa}
-
+.arrow_box {padding:0px 5px; background-color:cornflowerblue; color:white; line-height:1.0; font-weight:bold;}
 #stem_stack {width:95%; background-color:white; border-spacing:5px; margin:0px auto;}
 #stem_stack>tbody>tr>td {padding:10px;}
 
