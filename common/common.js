@@ -1268,3 +1268,12 @@ function selectAll(className)
   return modifiedElems;
 }
 
+function getFuncName(func)
+{
+  var m = String(func).match(/function\s+([^ ]+)\s*[(]/);
+  if (m && m[1]) {
+    return m[1];
+  }
+  return null;
+}
+

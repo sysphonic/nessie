@@ -6,7 +6,7 @@
 
 ## * nessiefoot - HTML5 IndexedDB Editor
 
-<New BSD License>
+[New BSD License]
 
 1. Place the whole project in your site which accesses HTML5 IndexedDB.
 2. Access http:// .. /nessie/foot.html

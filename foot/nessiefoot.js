@@ -188,7 +188,7 @@ function displayStoreRecords(oStore, ikeyPath)
   html += "<tbody>";
   if (oRecords.length == 0) {
     html += " <tr>";
-    html += "   <td colspan=\"2\">";
+    html += "   <td colspan=\"10\">";
     html += "     <div class=\"div_empty\">No Data found.</div>";
     html += "   </td>";
     html += " </tr>";
@@ -264,7 +264,7 @@ function displayStoreRecord(record)
       var val = record.attrs[attr];
       var valType = typeof(val);
       if (valType == "object" && val.constructor) {
-        valType = val.constructor;
+        valType = (getFuncName(val.constructor) || valType);
       }
       var dispVal = null;
       if (val == undefined) {
@@ -281,7 +281,7 @@ function displayStoreRecord(record)
     }
   } else {
     html += " <tr>";
-    html += "   <td colspan=\"2\">";
+    html += "   <td colspan=\"10\">";
     html += "     <div class=\"div_empty\">No Record selected.</div>";
     html += "   </td>";
     html += " </tr>";
