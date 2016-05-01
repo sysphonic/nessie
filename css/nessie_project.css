@@ -1,14 +1,16 @@
+body {font-family:Segoe UI,verdana,Helvetica,Arial,FreeSans,san-serif; color:#000000; margin:0px; line-height:1.7;}
+div {margin:0px; padding:0px;}
 table {border-spacing:0px;}
+td {padding:0px;}
 a {color: #754e00;}
 a:link {text-decoration:underline; color:navy;}
 a:visited {text-decoration:underline; color:navy;}
-body {font-family:Segoe UI,verdana,Helvetica,Arial,FreeSans,san-serif; color:#000000; margin:0px;}
-.caption {font-family:Meiryo UI,verdana,Segoe UI,Helvetica,Arial,FreeSans,san-serif; color:#000000; margin:0px;}
-ul {line-height:1.8;}
 img {vertical-align:middle;}
 pre {font-size:1.0em; background:black; color:white; padding:15px;}
 hr {border:0px; width:90%; border-bottom:1px solid #aaa}
-.arrow_box {padding:0px 5px; background-color:cornflowerblue; color:white; line-height:1.0; font-weight:bold;}
+.caption {font-family:Meiryo UI,verdana,Segoe UI,Helvetica,Arial,FreeSans,san-serif; color:#000000; margin:0px;}
+.capbox {padding:0px 5px; font-weight:bold; color:white; line-height:1.0;}
+.capbox.arrow {background-color:cornflowerblue;}
 #stem_stack {width:95%; background-color:white; border-spacing:5px; margin:0px auto;}
 #stem_stack>tbody>tr>td {padding:10px;}
 
