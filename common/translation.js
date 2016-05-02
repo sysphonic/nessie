@@ -65,7 +65,7 @@ var t_h = {
       en: "Current board will be deleted. Are you sure?",
       ja: "現在のボードを削除します。よろしいですか？"
     },
-  "msg.confirm_delete_pane":
+  "msg.confirm_delete_cell":
     {
       en: "Selected cell will be deleted. Are you sure?",
       ja: "選択されているセルを削除します。よろしいですか？"
@@ -95,7 +95,7 @@ var t_h = {
       en: "-",
       ja: "－"
     },
-  "pane.content.type.text":
+  "cell.content.type.text":
     {
       en: "Text",
       ja: "テキスト"
@@ -110,17 +110,17 @@ var t_h = {
       en: "Spaces and line breaks will be kept in monospaced font when &quot;Preformatted&quot; is checked.<br/>(Usually OFF is recommended)",
       ja: "「整形済み」にチェックすると、スペース・改行などがそのまま等幅フォントで表示されます。<br/>（通常はOFFをお勧めします）"
     },
-  "pane.content.type.image":
+  "cell.content.type.image":
     {
       en: "Image",
       ja: "画像"
     },
-  "pane.content.type.board":
+  "cell.content.type.board":
     {
       en: "Board",
       ja: "ボード"
     },
-  "pane.content.type.list":
+  "cell.content.type.list":
     {
       en: "List",
       ja: "箇条書き"
@@ -415,42 +415,42 @@ var t_h = {
       en: "Paste",
       ja: "貼付"
     },
-  "context_menu.pane_property":
+  "context_menu.cell_property":
     {
       en: "Style",
       ja: "スタイル"
     },
-  "context_menu.pane_content":
+  "context_menu.cell_content":
     {
       en: "Content",
       ja: "内容"
     },
-  "context_menu.copy_pane":
+  "context_menu.copy_cell":
     {
       en: "Copy",
       ja: "コピー"
     },
-  "context_menu.cut_pane":
+  "context_menu.cut_cell":
     {
       en: "Cut",
       ja: "切り取り"
     },
-  "context_menu.paste_pane":
+  "context_menu.paste_cell":
     {
       en: "Paste",
       ja: "貼付"
     },
-  "context_menu.remove_pane":
+  "context_menu.remove_cell":
     {
-      en: "Remove pane",
+      en: "Remove cell",
       ja: "削除"
     },
-  "context_menu.paste_pane_style":
+  "context_menu.paste_cell_style":
     {
       en: "Paste (Style)",
       ja: "貼付 （スタイル）"
     },
-  "context_menu.paste_pane_content":
+  "context_menu.paste_cell_content":
     {
       en: "Paste (Content)",
       ja: "貼付 （内容）"

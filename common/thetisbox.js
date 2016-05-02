@@ -1068,7 +1068,7 @@ Object.extend(Object.extend(ThetisBox.prototype, ThetisBox.Base.prototype), {
   },
   selectTree: function(nodeId, forceOpen)
   {
-    ThetisBox.selectTree(this.getTreeRootDivId(), nodeId, forceOpen);
+    return ThetisBox.selectTree(this.getTreeRootDivId(), nodeId, forceOpen);
   },
   getSelectedTreeNodeId: function()
   {
@@ -1807,17 +1807,21 @@ ThetisBox._openTree = function(nodeBlock, open)
 ThetisBox.selectTree = function(rootDiv, nodeId, forceOpen)
 {
   var selKeeperId = ThetisBox.getSelKeeperId(rootDiv);
-  var lastSelected = _z(selKeeperId).value;
-  if (lastSelected != "") {
+  var selKeeper = _z(selKeeperId);
+  if (!selKeeper) {
+    return false;
+  }
+  var lastSelected = selKeeper.value;
+  if (lastSelected) {
     _z(lastSelected).style.backgroundColor = "";
   }
   var linkerId = ThetisBox.getLinkerIdFromDivId(rootDiv+":"+nodeId);
   var linker = _z(linkerId);
-  if (linker == null) {
-    return;
+  if (!linker) {
+    return false;
   }
   linker.style.backgroundColor = "aquamarine";
-  _z(selKeeperId).value = linkerId;
+  selKeeper.value = linkerId;
 
   if (forceOpen == true)
   {
@@ -1831,6 +1835,7 @@ ThetisBox.selectTree = function(rootDiv, nodeId, forceOpen)
       }
     }
   }
+  return true;
 }
 
 ThetisBox.isSelectedTree = function(rootDiv, nodeId)

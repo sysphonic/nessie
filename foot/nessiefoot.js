@@ -677,68 +677,37 @@ function activateDraggableBorders()
     initialize: function() {
     },
     onStart: function(eventName, draggable, event) {
-      if (getUserAgentName() == "gecko") {
-        if (draggable.element.id == "drag_v_border") {
-          var div_db_tree = _z("div_db_tree");
-          var td_tree = _z("td_tree");
-          var td_view = _z("td_view");
-          var div_records = _z("div_records");
-          var div_record_info = _z("div_record_info");
-
-          var orgWidthRecordTree = div_db_tree.offsetWidth;
-          var orgWidthRecords = div_records.offsetWidth;
-
-          draggable.options.snap = function(x, y) {
-            return onVerticalBorderDragged(x, y, div_db_tree, td_tree, td_view, div_records, div_record_info, orgWidthRecordTree, orgWidthRecords)
-          };
-        } else if (draggable.element.id == "drag_h_border") {
-          var div_records = _z("div_records");
-          var div_record_info = _z("div_record_info");
-
-          var orgHeightRecords = div_records.offsetHeight;
-          var orgHeightRecordInfo = div_record_info.offsetHeight;
-
-          draggable.options.snap = function(x, y) {
-            return onHorizontalBorderDragged(x, y, div_records, div_record_info, orgHeightRecords, orgHeightRecordInfo);
-          };
-        }
-      }
     },
     onDrag: function(eventName, draggable, event) {
-      if (getUserAgentName() != "gecko") {
-        if (draggable.element.id == "drag_v_border") {
-          var div_db_tree = _z("div_db_tree");
-          var td_tree = _z("td_tree");
-          var td_view = _z("td_view");
-          var div_records = _z("div_records");
-          var div_record_info = _z("div_record_info");
+      if (draggable.element.id == "drag_v_border") {
+        var div_db_tree = _z("div_db_tree");
+        var td_tree = _z("td_tree");
+        var td_view = _z("td_view");
+        var div_records = _z("div_records");
+        var div_record_info = _z("div_record_info");
 
-          var orgWidthRecordTree = div_db_tree.offsetWidth;
-          var orgWidthRecords = div_records.offsetWidth;
+        var orgWidthRecordTree = div_db_tree.offsetWidth;
+        var orgWidthRecords = div_records.offsetWidth;
 
-          draggable.options.snap = function(x, y) {
-            return onVerticalBorderDragged(x, y, div_db_tree, td_tree, td_view, div_records, div_record_info, orgWidthRecordTree, orgWidthRecords)
-          };
-        } else if (draggable.element.id == "drag_h_border") {
-          var div_records = _z("div_records");
-          var div_record_info = _z("div_record_info");
+        draggable.options.snap = function(x, y) {
+          return onVerticalBorderDragged(x, y, div_db_tree, td_tree, td_view, div_records, div_record_info, orgWidthRecordTree, orgWidthRecords)
+        };
+      } else if (draggable.element.id == "drag_h_border") {
+        var div_records = _z("div_records");
+        var div_record_info = _z("div_record_info");
 
-          var orgHeightRecords = div_records.offsetHeight;
-          var orgHeightRecordInfo = div_record_info.offsetHeight;
+        var orgHeightRecords = div_records.offsetHeight;
+        var orgHeightRecordInfo = div_record_info.offsetHeight;
 
-          draggable.options.snap = function(x, y) {
-            return onHorizontalBorderDragged(x, y, div_records, div_record_info, orgHeightRecords, orgHeightRecordInfo);
-          };
-        }
+        draggable.options.snap = function(x, y) {
+          return onHorizontalBorderDragged(x, y, div_records, div_record_info, orgHeightRecords, orgHeightRecordInfo);
+        };
       }
     },
     onEnd: function(eventName, draggable, event) {
       if (draggable.element.id != "drag_v_border"
           && draggable.element.id != "drag_h_border") {
         return;
-      }
-      if (getUserAgentName() == "gecko") {
-        draggable.options.snap = false;
       }
     }
   }
