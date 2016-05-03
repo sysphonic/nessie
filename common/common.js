@@ -957,11 +957,24 @@ function getDateString(date)
   return ret;
 }
 
-function getDateFromString(date_s)
+function getDateFromString(dateStr)
 {
-  var parts = date_s.split("-");
-
-  return new Date(parts[0], parseInt(parts[1], 10)-1, parts[2]);
+  if (!dateStr) {
+    return null;
+  }
+  var m = dateStr.match(/^(\d+)[-](\d+)[-](\d+)\s+(\d+):(\d+):(\d+)[.](\d+)$/);
+  if (m) {
+    return new Date(m[1], m[2], m[3], m[4], m[5], m[6], m[7]);
+  }
+  m = dateStr.match(/^(\d+)[-](\d+)[-](\d+)\s+(\d+):(\d+):(\d+)$/);
+  if (m) {
+    return new Date(m[1], m[2], m[3], m[4], m[5], m[6]);
+  }
+  m = dateStr.match(/^(\d+)[-](\d+)[-](\d+)$/);
+  if (m) {
+    return new Date(m[1], m[2], m[3]);
+  }
+  return null;
 }
 
 function getByteSize(str)
@@ -1270,10 +1283,24 @@ function selectAll(className)
 
 function getFuncName(func)
 {
-  var m = String(func).match(/function\s+([^ ]+)\s*[(]/);
+  var m = String(func).match(/function\s+([^\s(]+)\s*[(]/);
   if (m && m[1]) {
     return m[1];
   }
   return null;
+}
+
+function getTypeExp(obj)
+{
+  var objType = typeof(obj);
+  if (objType == "object") {
+    if (obj == null) {
+      return "null";
+    }
+    if (obj.constructor) {
+      objType = (getFuncName(obj.constructor) || objType);
+    }
+  }
+  return objType;
 }
 

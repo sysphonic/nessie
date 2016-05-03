@@ -168,6 +168,20 @@ function getRecordSummary(oRecord, ikeyPath)
   return summary.join("<span style=\"color:gray;\">, </span>");
 }
 
+function getRecordValExp(val, valType)
+{
+  var dispVal = (val || "");
+  switch (valType) {
+    case "Array":
+      dispVal = val.inspect();  // prototype.js
+      break;
+    case "Date":
+      dispVal = getDateTimeExp(val);
+      break;
+  }
+  return String(dispVal);
+}
+
 function displayStoreRecords(oStore, ikeyPath)
 {
   ThetisBox.clear("CONFIRM");
@@ -202,11 +216,10 @@ function displayStoreRecords(oStore, ikeyPath)
         var val = oRecord.attrs[attr];
         var dispVal = null;
         if (val == undefined) {
-          val = "";
           dispVal = "<span style=\"color:gray;\">--</span>";
         } else {
-          val = String(val);
-          dispVal = escapeHTML(truncateStr(val, 100));
+          var valType = getTypeExp(val);
+          dispVal = escapeHTML(truncateStr(getRecordValExp(val, valType), 100));
         }
         var classAttr = "";
         if (attr == ikeyPath) {
@@ -214,7 +227,7 @@ function displayStoreRecords(oStore, ikeyPath)
         }
         html += "   <td "+classAttr+" style=\"text-align:center;\">";
         html += dispVal;
-        html += "     <span class=\"sort_"+escapeHTML(String(attr))+"\" style=\"display:none;\">"+escapeHTML(val)+"</span>";
+        html += "     <span class=\"sort_"+escapeHTML(String(attr))+"\" style=\"display:none;\">"+escapeHTML(String(val))+"</span>";
         html += "   </td>";
       }
       html += "   <td><input type=\"checkbox\" class=\"check_record\" id=\"check_record"+escapeHTML(String(keyPathVal))+"\" onclick=\"stopEvent(event, false);\" /></td>";
@@ -262,15 +275,12 @@ function displayStoreRecord(record)
   if (record) {
     for (var attr in record.attrs) {
       var val = record.attrs[attr];
-      var valType = typeof(val);
-      if (valType == "object" && val.constructor) {
-        valType = (getFuncName(val.constructor) || valType);
-      }
+      var valType = getTypeExp(val);
       var dispVal = null;
       if (val == undefined) {
         dispVal = "<span style=\"color:gray;\">--</span>";
       } else {
-        dispVal = escapeHTML(String(val));
+        dispVal = escapeHTML(getRecordValExp(val, valType));
       }
 
       html += " <tr>";
@@ -469,14 +479,15 @@ function getEditRecordHtml(oDatabase, oStore, oRecord)
     html += fieldName;
     html += "    </td>";
     html += "    <td style=\"text-align:center;\">";
-    var val = "";
+    var val = null;
+    var dispVal = "";
     var valType = null;
     if (oRecord) {
-      val = (oRecord.attrs[fieldName] || "");
-      valType = typeof(val);
-      valConstructor = val.constructor;
+      val = oRecord.attrs[fieldName];
+      valType = getTypeExp(val);
+      dispVal = getRecordValExp(val, valType);
     }
-    html += "      <textarea class=\"edit_record_val\" id=\"edit_record:"+escapeHTML(fieldName)+"\" style=\"width:90%; height:50px:\">"+escapeHTML(String(val))+"</textarea>";
+    html += "      <textarea class=\"edit_record_val\" id=\"edit_record:"+escapeHTML(fieldName)+"\" style=\"width:90%; height:50px:\">"+escapeHTML(String(dispVal))+"</textarea>";
     html += "    </td>";
     html += "    <td style=\"text-align:center; padding:0px 5px;\">";
     html += "      <select class=\"val_type\" id=\"val_type:"+escapeHTML(fieldName)+"\" style=\"width:80px;\">";
@@ -485,10 +496,14 @@ function getEditRecordHtml(oDatabase, oStore, oRecord)
     html += "        <option value=\"string\" "+selected+"></option>";
     selected = (valType == "number")?"selected":"";
     html += "        <option value=\"number\" "+selected+">Number</option>";
-    selected = ((valType == "object") && (valConstructor == Array))?"selected":"";
+    selected = (valType == "Array")?"selected":"";
     html += "        <option value=\"array\" "+selected+">Array</option>";
-    selected = ((valType == "object") && (valConstructor == Date))?"selected":"";
+    selected = (valType == "Date")?"selected":"";
     html += "        <option value=\"date\" "+selected+">Date</option>";
+    selected = (valType == "null")?"selected":"";
+    html += "        <option value=\"null\" "+selected+">null</option>";
+    selected = (valType == "undefined")?"selected":"";
+    html += "        <option value=\"undefined\" "+selected+">undefined</option>";
     html += "      </select>";
     html += "    </td>";
     html += "  </tr>";
@@ -600,7 +615,13 @@ function onEditRecordOkClicked(dbName, storeName, keyPathVal)
           val = eval(val);
           break;
         case "date":
-          val = Date.parse(val);
+          val = getDateFromString(val);
+          break;
+        case "null":
+          val = null;
+          break;
+        case "undefined":
+          val = undefined;
           break;
       }
     } catch (e) {
