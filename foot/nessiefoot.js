@@ -498,7 +498,7 @@ function getEditRecordHtml(oDatabase, oStore, oRecord)
     html += "      <textarea class=\"edit_record_val\" id=\"edit_record:"+escapeHTML(fieldName)+"\" style=\"width:90%; height:50px:\">"+escapeHTML(String(dispVal))+"</textarea>";
     html += "    </td>";
     html += "    <td style=\"text-align:center; padding:0px 5px;\">";
-    html += "      <select class=\"val_type\" id=\"val_type:"+escapeHTML(fieldName)+"\" style=\"width:80px;\">";
+    html += "      <select class=\"val_type\" id=\"val_type:"+escapeHTML(fieldName)+"\" style=\"width:85px;\" onchange=\"onRecordValTypeChanged('"+escapeHTML(fieldName)+"')\">";
     var selected = "";
     selected = (valType == "string")?"selected":"";
     html += "        <option value=\"string\" "+selected+"></option>";
@@ -546,6 +546,24 @@ function getEditRecordHtml(oDatabase, oStore, oRecord)
   return html;
 }
 
+function onRecordValTypeChanged(fieldName)
+{
+  var val_type = _z("val_type:"+fieldName);
+  var edit_record = _z("edit_record:"+fieldName);
+  if (!val_type || !edit_record) {
+    return;
+  }
+  switch (val_type.value) {
+    case "null":
+    case "undefined":
+      edit_record.disabled = true;
+      break;
+    default:
+      edit_record.disabled = false;
+      break;
+  }
+}
+
 function showEditRecord(oDatabase, oStore, oRecord)
 {
   hideEditRecord();
@@ -566,6 +584,11 @@ function showEditRecord(oDatabase, oStore, oRecord)
             "",
             getEditRecordHtml(oDatabase, oStore, oRecord)
           );
+
+  for (var i=0; i < oStore.fieldNames.length; i++) {
+    var fieldName = oStore.fieldNames[i];
+    onRecordValTypeChanged(fieldName);
+  }
 }
 
 function onCreateRecordClicked()

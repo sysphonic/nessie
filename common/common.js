@@ -964,15 +964,15 @@ function getDateFromString(dateStr)
   }
   var m = dateStr.match(/^(\d+)[-](\d+)[-](\d+)\s+(\d+):(\d+):(\d+)[.](\d+)$/);
   if (m) {
-    return new Date(m[1], m[2], m[3], m[4], m[5], m[6], m[7]);
+    return new Date(m[1], parseInt(m[2], 10)-1, m[3], m[4], m[5], m[6], m[7]);
   }
   m = dateStr.match(/^(\d+)[-](\d+)[-](\d+)\s+(\d+):(\d+):(\d+)$/);
   if (m) {
-    return new Date(m[1], m[2], m[3], m[4], m[5], m[6]);
+    return new Date(m[1], parseInt(m[2], 10)-1, m[3], m[4], m[5], m[6]);
   }
   m = dateStr.match(/^(\d+)[-](\d+)[-](\d+)$/);
   if (m) {
-    return new Date(m[1], m[2], m[3]);
+    return new Date(m[1], parseInt(m[2], 10)-1, m[3]);
   }
   return null;
 }
