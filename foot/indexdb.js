@@ -37,6 +37,9 @@ function ixStore(oDatabase, store)
   this.addRecord = function(rec) {
     this.records.push(new ixRecord(rec, oDatabase, oStore));
   };
+  this.clearRecords = function() {
+    this.records = [];
+  };
   return this;
 }
 

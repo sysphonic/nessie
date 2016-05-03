@@ -346,13 +346,16 @@ function findRecordCache(oStore, keyPathVal)
   if (!oStore) {
     return null;
   }
+var arr = [];
   var oRecords = oStore.records;
   for (var i=0; i < oRecords.length; i++) {
     var oRecord = oRecords[i];
     if (String(keyPathVal) == String(oRecord.keyPathVal)) {
       return oRecord;
     }
+arr.push(String(oRecord.keyPathVal));
   }
+alert(arr.join(", "));
   return null;
 }
 
@@ -396,7 +399,12 @@ function getStoreOrIndexInfo(dbName, storeName, indexName)
 
       var store = tx.objectStore(storeName);
       _curDatabase = findDbCache(dbName);
-      _curStore = new ixStore(_curDatabase, store);
+      _curStore = findStoreCache(_curDatabase, storeName);
+      if (_curStore) {
+        _curStore.clearRecords();
+      } else {
+        _curStore = new ixStore(_curDatabase, store);
+      }
       _curIndex = null;
 
       var reqCursor = store.openCursor();
