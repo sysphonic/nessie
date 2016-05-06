@@ -672,7 +672,7 @@ function onEditRecordOkClicked(dbName, storeName, keyPathVal)
     tip("Successfully updated.", "TOP-RIGHT");
     onStoreOrIndexClicked();
   };
-  ixOpenDb(_curDatabase.name, null, _ixStore, [oStore.name, attrs, onsuccess]);
+  ixOpenDb(_curDatabase.name, null, _ixSave, [oStore.name, attrs, onsuccess]);
 
   hideEditRecord();
 }

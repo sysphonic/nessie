@@ -30,6 +30,11 @@ var t_h = {
       en: "Successfully saved.",
       ja: "保存しました。"
     },
+  "msg.updated":
+    {
+      en: "Successfully updated.",
+      ja: "更新しました。"
+    },
   "msg.board_saved":
     {
       en: "Successfully saved.",
@@ -90,6 +95,11 @@ var t_h = {
       en: "The last content entry will be deleted. Are you sure?",
       ja: "保存されている以前の内容は削除されます。よろしいですか？"
     },
+  "msg.drag_to_change_order":
+    {
+      en: "Drag to change orders.",
+      ja: "ドラッグして順番を入れ替えられます。"
+    },
   "msg.hyphen":
     {
       en: "-",
@@ -129,6 +139,11 @@ var t_h = {
     {
       en: " : ",
       ja: "："
+    },
+  "cap.change_order":
+    {
+      en: "Change order",
+      ja: "並び替え"
     },
   "cap.class":
     {

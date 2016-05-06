@@ -178,7 +178,7 @@ function _ixScan(db, args)
   };
 }
 
-function _ixStore(db, args)
+function _ixSave(db, args)
 {
   var storeName = args[0];
   var attrs = args[1];

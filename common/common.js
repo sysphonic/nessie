@@ -4,11 +4,6 @@
  This module is released under New BSD License.
  **-----------------**-----------------**-----------------**/
 
-var appName = window.navigator.appName;
-var is_MS = (appName.toLowerCase().indexOf('explorer') >= 0);        // MSIE, Sleipnir
-var is_Netscape = (appName.toLowerCase().indexOf('netscape') >= 0);  // Firefox, Safari
-var is_Opera = (appName.toLowerCase().indexOf('opera') >= 0);
-
 function getUserAgentName()
 {
   var userAgent = window.navigator.userAgent.toLowerCase();

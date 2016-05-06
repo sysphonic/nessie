@@ -706,15 +706,7 @@ ThetisPalette.prototype.show = function (x, y)
               );
   }
 
-// DRAG BY PROTOTYPE.JS >>>
-/*
-// 2007.10.09 Dragging
-  dispElem.onmousedown = this.onMouseDown;
-  dispElem.onmousemove = this.onMouseMove;
-  dispElem.onmouseup = this.onMouseUp;
-*/
   this.draggable = new Draggable(dispElem.id, {revert:false, starteffect:"", endeffect:"", zindex:__this.zindex});
-// DRAG BY PROTOTYPE.JS <<<
 
   if (isNaN(x) || isNaN(y)) {
     var pos = ThetisPalette._getPos(paintarea, true);
@@ -724,13 +716,9 @@ ThetisPalette.prototype.show = function (x, y)
       pos = ThetisPalette._getPos(document.getElementById(this.disp_id), true);
     }
 
-    if (!is_Opera) {
-      if (is_dtdStandard || !is_MS) {
-        var scroll = ThetisPalette._getScroll(paintarea)
-        pos.x -= scroll.left;
-        pos.y -= scroll.top;
-      }
-    }
+    var scroll = ThetisPalette._getScroll(paintarea)
+    pos.x -= scroll.left;
+    pos.y -= scroll.top;
 
     dispElem.style.left = (pos.x + paintarea.clientWidth) + "px";
     dispElem.style.top = pos.y + "px";
@@ -744,15 +732,8 @@ ThetisPalette.prototype.show = function (x, y)
   this._show();
 };
 
-var _appName = window.navigator.appName;
-var is_MS = (_appName.toLowerCase().indexOf("explorer") >= 0);       // MSIE, Sleipnir
-//var is_Netscape = (_appName.toLowerCase().indexOf("netscape") >= 0); // Firefox, Safari
-var is_Opera = (_appName.toLowerCase().indexOf("opera") >= 0);       // Opera
-
-var is_dtdStandard = (document.compatMode == "CSS1Compat");
-
-ThetisPalette._getPos = function (elem, flag) {
-
+ThetisPalette._getPos = function (elem, flag)
+{
   var change_display = false;
   try {
     if (elem.style.display == "none") {
@@ -778,7 +759,8 @@ ThetisPalette._getPos = function (elem, flag) {
   return obj;
 }
 
-ThetisPalette._getScroll = function (elem) {
+ThetisPalette._getScroll = function (elem)
+{
   var obj = new Object();
   obj.left = 0;
   obj.top = 0;
@@ -793,112 +775,4 @@ ThetisPalette._getScroll = function (elem) {
   }
   return obj;
 }
-
-/* DRAG BY PROTOTYPE.JS >>>
-// 2007.10.09 Dragging
-
-ThetisPalette._within = function(elem, x, y) {
-  var elemPos = ThetisPalette._getPos(elem, true);
-  var eX = elemPos.x;
-  var eY = elemPos.y;
-  var eWidth = elem.offsetWidth;
-  var eHeight = elem.offsetHeight;
-
-  if (is_Opera || (is_MS && !is_dtdStandard)) {
-    var scroll = ThetisPalette._getScroll(elem);
-    eX -= scroll.left;
-    eY -= scroll.top;
-  }
-//alert("x="+x+", y="+y+"\neX="+eX+", eY="+eY+", eWidth="+eWidth+", eHeight="+eHeight);
-
-  return(x >= eX && x <= eX + eWidth && y >= eY && y <= eY + eHeight);
-}
-
-
-ThetisPalette._getBodyScroll = function()
-{
-  var obj = new Object();
-  obj.left = 0;
-  obj.top = 0;
-
-  if (document.documentElement != null) {
-     obj.left = document.documentElement.scrollLeft;
-     obj.top = document.documentElement.scrollTop;
-  }
-  if (document.body != null) {
-    if (isNaN(obj.left) || obj.left == 0) {
-      obj.left = document.body.scrollLeft;
-    }
-    if (isNaN(obj.top) || obj.top == 0) {
-      obj.top = document.body.scrollTop;
-    }
-  }
-  return obj;
-}
-
-ThetisPalette.prototype.onMouseDown = function (e) {
-  var acceptArray = [
-    this.id+"_handle"
-  ];
-
-  var bodyScroll = ThetisPalette._getBodyScroll();
-
-  for (var i=0; i < acceptArray.length; i++) {
-    var acceptCtrl = document.getElementById(acceptArray[i]);
-    if (acceptCtrl == null) {
-      continue;
-    }
-    var within = false;
-    if (document.all) {
-      within = ThetisPalette._within(acceptCtrl, bodyScroll.left+event.clientX, bodyScroll.top+event.clientY);
-    } else if (document.getElementById) {
-      within = ThetisPalette._within(acceptCtrl, bodyScroll.left+e.clientX, bodyScroll.top+e.clientY);
-    }
-    if (within != true) {
-      return true;
-    }
-  }
-
-  this.selected = true;
-  if (document.all) {
-    this.offsetX = event.clientX + bodyScroll.left - parseInt(this.style.left);
-    this.offsetY = event.clientY + bodyScroll.top - parseInt(this.style.top);
-  } else if (document.getElementById) {
-    this.offsetX = e.pageX - parseInt(this.style.left);
-    this.offsetY = e.pageY - parseInt(this.style.top);
-  }
-  return false;
-}
-
-ThetisPalette.prototype.onMouseMove = function(e) {
-  if (!this.selected) {
-    return true;
-  }
-
-  var l, t;
-  if (document.all) {
-    var bodyScroll = ThetisPalette._getBodyScroll();
-    l = event.clientX + bodyScroll.left - this.offsetX;
-    t = event.clientY + bodyScroll.top - this.offsetY;
-  } else if (document.getElementById) {
-    l = e.pageX - this.offsetX;
-    t = e.pageY - this.offsetY;
-  }
-  if (l >= 0 && t >= 0 && l <= 5000 && t <= 10000) {
-    this.style.left = l + "px";
-    this.style.top = t + "px";
-  } else {
-    this.selected = false;
-    try {
-      document.selection.empty();
-    } catch(e){}
-  }
-  return false;
-}
-
-ThetisPalette.prototype.onMouseUp = function(e) {
-  this.selected = false;
-}
-// 2007.10.09 Dragging
- DRAG BY PROTOTYPE.JS <<< */
 
