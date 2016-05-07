@@ -258,7 +258,7 @@ function onStoreRecordClicked(elem, keyPathVal)
   }
 }
 
-function displayStoreRecord(record)
+function displayStoreRecord(oRecord)
 {
   hideEditRecord();
 
@@ -272,9 +272,14 @@ function displayStoreRecord(record)
   html += "</thead>";
 
   html += "<tbody>";
-  if (record) {
-    for (var attr in record.attrs) {
-      var val = record.attrs[attr];
+  if (oRecord) {
+    var oStore = oRecord.store;
+    for (var i=0; i < oStore.fieldNames.length; i++) {
+      var attr = oStore.fieldNames[i];
+      if (Object.keys(oRecord.attrs).indexOf(attr) < 0) {
+        continue;
+      }
+      var val = oRecord.attrs[attr];
       var valType = getTypeExp(val);
       var dispVal = null;
       if (val == undefined) {
