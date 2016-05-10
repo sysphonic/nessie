@@ -22,4 +22,6 @@ div.hr {border-bottom:solid 1px gray; margin:5px 0px;}
 .regular_table>tbody#sortable_items>tr>td {cursor:move; border:2px solid transparent;}
 .regular_table>tbody#sortable_items>tr>td:hover {border-color:lime;}
 
+.regular_table>tbody>tr.disabled>td {color:gray;}
+
 .record_selected>td {background-color:greenyellow;}

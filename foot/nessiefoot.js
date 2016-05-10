@@ -276,19 +276,23 @@ function displayStoreRecord(oRecord)
     var oStore = oRecord.store;
     for (var i=0; i < oStore.fieldNames.length; i++) {
       var attr = oStore.fieldNames[i];
-      if (Object.keys(oRecord.attrs).indexOf(attr) < 0) {
-        continue;
-      }
-      var val = oRecord.attrs[attr];
-      var valType = getTypeExp(val);
-      var dispVal = null;
-      if (val == undefined) {
-        dispVal = "<span style=\"color:gray;\">--</span>";
+      var trClassAttr = "";
+      var dispVal = "";
+      var valType = "";
+      if (Object.keys(oRecord.attrs).indexOf(attr) >= 0) {
+        var val = oRecord.attrs[attr];
+        valType = getTypeExp(val);
+        if (val == undefined) {
+          dispVal = "<span style=\"color:gray;\">--</span>";
+        } else {
+          dispVal = escapeHTML(getRecordValExp(val, valType));
+        }
       } else {
-        dispVal = escapeHTML(getRecordValExp(val, valType));
+        trClassAttr = " class=\"disabled\"";
+        dispVal = "--";
+        valType = "--";
       }
-
-      html += " <tr>";
+      html += " <tr"+trClassAttr+">";
       html += "   <td>"+escapeHTML(String(attr))+"</td>";
       html += "   <td>"+dispVal+"</td>";
       html += "   <td>"+escapeHTML(String(valType))+"</td>";
