@@ -67,14 +67,14 @@ function onResize(reqInit)
 
   var div_db_tree = _z("div_db_tree");
   if (div_db_tree) {
-    div_db_tree.style.height = (regionHight-6) + "px";
+    div_db_tree.style.height = (regionHight-8) + "px";
   }
 
   if (reqInit) {
     var div_records = _z("div_records");
     var div_record_info = _z("div_record_info");
-    div_records.style.height = ((regionHight-6-7)/2) + "px";
-    div_record_info.style.height = ((regionHight-6-7)/2) + "px";
+    div_records.style.height = ((regionHight-6-8)/2) + "px";
+    div_record_info.style.height = ((regionHight-6-8)/2) + "px";
   }
 }
 
@@ -235,6 +235,10 @@ function displayStoreRecords(oStore, ikeyPath)
     }
   }
   html += "</tbody>";
+
+  var div_records = _z("div_records");
+  var orgWidth = div_records.offsetWidth;
+  div_records.style.maxWidth = orgWidth + "px";
 
   _z("tbl_records").innerHTML = html;
 }
