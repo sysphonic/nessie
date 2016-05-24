@@ -831,16 +831,24 @@ function moveListTrimPrefix(src, dst, valSeparator, textSeparator)
 
 function selectListAll(list)
 {
+  var entries = [];
   for (var i=0; i < list.length; i++) {
-    list.options[i].selected = true;
+    var option = list.options[i];
+    option.selected = true;
+    entries.push(option.value);
   }
+  return entries;
 }
 
 function deselectListAll(list)
 {
+  var entries = [];
   for (var i=0; i < list.length; i++) {
-    list.options[i].selected = false;
+    var option = list.options[i];
+    option.selected = false;
+    entries.push(option.value);
   }
+  return entries;
 }
 
 function _prepareShiftListItems(list)
@@ -1299,3 +1307,23 @@ function getTypeExp(obj)
   return objType;
 }
 
+function mergeHash(hashOrg, hashNew)
+{
+  var ret = {};
+  if (hashOrg) {
+    for (var key in hashOrg) {
+      ret[key] = hashOrg[key];
+    }
+  }
+  if (hashNew) {
+    for (var key in hashNew) {
+      ret[key] = hashNew[key];
+    }
+  }
+  return ret;
+}
+
+function getRandomInt(min, max)
+{
+  return Math.floor( Math.random() * (max - min + 1) ) + min;
+}

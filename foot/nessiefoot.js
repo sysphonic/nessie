@@ -359,16 +359,13 @@ function findRecordCache(oStore, keyPathVal)
   if (!oStore) {
     return null;
   }
-var arr = [];
   var oRecords = oStore.records;
   for (var i=0; i < oRecords.length; i++) {
     var oRecord = oRecords[i];
     if (String(keyPathVal) == String(oRecord.keyPathVal)) {
       return oRecord;
     }
-arr.push(String(oRecord.keyPathVal));
   }
-alert(arr.join(", "));
   return null;
 }
 
@@ -385,8 +382,10 @@ function getDbInfo(db, args)
     try {
       var tx = db.transaction(db.objectStoreNames);
 
-      tx.oncomplete = function() { nextFunc(oDatabase) };
-      //tx.onabort = function() { nextFunc(oDatabase) };  // for Chrome
+      if (nextFunc) {
+        tx.oncomplete = function() { nextFunc(oDatabase) };
+        //tx.onabort = function() { nextFunc(oDatabase) };  // for Chrome
+      }
 
       for (var i=0; i < db.objectStoreNames.length; i++) {
         var storeName = db.objectStoreNames.item(i);
